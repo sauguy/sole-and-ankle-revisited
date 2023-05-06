@@ -7,6 +7,8 @@ import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
 
+import { QUERIES } from '../../constants';
+
 const SuperHeader = () => {
   return (
     <Wrapper>
@@ -23,6 +25,13 @@ const SuperHeader = () => {
 };
 
 const Wrapper = styled.div`
+  @media ${QUERIES.laptopAndDown} {
+    height: 4px;
+    * {
+      display: none;
+    }
+  }
+
   display: flex;
   align-items: center;
   gap: 24px;
