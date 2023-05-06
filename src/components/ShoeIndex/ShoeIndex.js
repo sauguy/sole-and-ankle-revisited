@@ -9,20 +9,24 @@ import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
 
+import { QUERIES } from '../../constants';
+
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          <FilterWrapper>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </FilterWrapper>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -35,22 +39,45 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             Shoes
           </Breadcrumbs.Crumb>
         </Breadcrumbs>
-        <Spacer size={42} />
-        <ShoeSidebar />
+        <ShoeSidebarWrapper>
+          <Spacer size={42} />
+          <ShoeSidebar />
+        </ShoeSidebarWrapper>
       </LeftColumn>
     </Wrapper>
   );
 };
+
+const FilterWrapper = styled.div`
+  @media ${QUERIES.phoneAndDown} {
+    display: none;
+  }
+`;
+
+const ShoeSidebarWrapper = styled.div`
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
   align-items: baseline;
   gap: 32px;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    gap: 8px;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  @media ${QUERIES.tabletAndDown} {
+    flex-basis: 0;
+  }
 `;
 
 const MainColumn = styled.div`
